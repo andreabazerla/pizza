@@ -1,8 +1,8 @@
-package entity;
-
 import java.io.File;
 import java.io.IOException;
 
+import entity.Instructions;
+import entity.Pizza;
 import utils.Parser;
 
 public class Main {
@@ -26,6 +26,8 @@ public class Main {
 
 		Pizza pizza = new Pizza(new File(inputFile), instructions, Parser.parsePizza(inputFile));
 		System.out.println(pizza.toString());
+		
+		
 
 	}
 

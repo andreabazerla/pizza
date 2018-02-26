@@ -20,8 +20,6 @@ public abstract class Input {
 		
 		String stringFilePath = Default.STRING;
 		
-		
-		
 		return stringFilePath;		
 	}
 

@@ -2,6 +2,7 @@ package entity;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 public class Pizza {
 
@@ -29,6 +30,10 @@ public class Pizza {
 
 	public void setCells(List<Cell> cells) {
 		this.cells = cells;
+	}
+
+	public Optional<Cell> getCell(int x, int y) {
+		return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
 	}
 
 	@Override
