@@ -70,7 +70,6 @@ public class Slice {
 				}
 				
 				this.setB(cell);
-				fillSlice();
 			}
 		}
 	}
@@ -128,9 +127,17 @@ public class Slice {
 		return cellEdgeList;
 		
 	}
+	
+	public int getScore()
+	{
 
-	public void fillSlice() {
-		
+		int deltaX = Math.abs(a.getX() - b.getX());
+		int deltaY = Math.abs(a.getY() - b.getY());
+
+		return deltaX * deltaY;
+
 	}
+	
+	// TODO Method to get score about slice
 
 }

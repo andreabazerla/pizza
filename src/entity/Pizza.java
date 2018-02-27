@@ -9,6 +9,7 @@ public class Pizza {
 	private final File file;
 	private final Instructions instructions;
 	private List<Cell> cells;
+	private List<Slice> slices;
 
 	public Pizza(File file, Instructions instructions, List<Cell> cells) {
 		this.file = file;
@@ -30,6 +31,16 @@ public class Pizza {
 
 	public void setCells(List<Cell> cells) {
 		this.cells = cells;
+	}
+	
+	public List<Slice> getSlices()
+	{
+		return slices;
+	}
+
+	public void setSlices(List<Slice> slices)
+	{
+		this.slices = slices;
 	}
 
 	public Optional<Cell> getCell(int x, int y) {
@@ -60,5 +71,25 @@ public class Pizza {
 
 		return stringBuilder.toString();
 	}
+	
+	public void add(Slice slice) {
+		this.slices.add(slice);
+	}
+	
+	public int getTotalScore() {
+		
+		int score = 0;
+		
+		if (!this.getSlices().isEmpty()) {
+			for (Slice slice : slices)
+			{
+				score += slice.getScore();
+			}
+		}
+		
+		return score;
+	}
+	
+	// TODO Method to get score about all list of slice in pizza
 
 }

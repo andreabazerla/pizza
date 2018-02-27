@@ -5,6 +5,10 @@ public class Point {
 	private int x;
 	private int y;
 	
+	public Point() {
+		this(0, 0);
+	}
+	
 	public Point(int x, int y)
 	{
 		this.x = x;
@@ -29,6 +33,12 @@ public class Point {
 	public void setY(int y)
 	{
 		this.y = y;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Point [x=" + x + ", y=" + y + "]";
 	}
 	
 }
