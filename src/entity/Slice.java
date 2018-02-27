@@ -49,9 +49,15 @@ public class Slice {
 	public void right(Pizza pizza) {
 
 		Optional<Cell> optionalCell = pizza.getCell(this.getA().getX() + 1, this.getA().getY());
+		
 		if (optionalCell.isPresent()) {
 			Cell cell = optionalCell.get();
-			this.setB(cell);
+			
+			if (cell.isAvailable()) {
+				this.setB(cell);
+				cellList.add(cell);
+				cell.setAvailable(false);
+			}
 		}
 	}
 
