@@ -1,9 +1,5 @@
 package entity;
 
-/**
- * @author andre
- *
- */
 public class Instructions {
 
 	private int rows;

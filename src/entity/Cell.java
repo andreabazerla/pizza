@@ -1,34 +1,14 @@
 package entity;
 
-public class Cell {
+public class Cell extends Point {
 
-	private int x;
-	private int y;
 	private Ingredient ingredient;
 	private boolean available;
 
 	public Cell(int x, int y, Ingredient ingredient, boolean available) {
-		super();
-		this.x = x;
-		this.y = y;
+		super(x, y);
 		this.ingredient = ingredient;
 		this.available = available;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public Ingredient getIngredient() {
