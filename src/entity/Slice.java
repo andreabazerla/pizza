@@ -138,6 +138,54 @@ public class Slice {
 
 	}
 	
+	public static boolean checkAvailability(Cell a, Cell b, Pizza pizza) {
+		
+		int x1 = a.getX();
+		int y1 = a.getY();
+		int x2 = b.getX();
+		int y2 = b.getY();
+		
+		int temp = 0;
+		
+		// TODO Change order of cells
+		
+		if (x1 > x2) {
+			temp = x1;
+			x2 = x1;
+			x1 = temp;
+			
+			if (y1 > y2) {
+				temp = y1;
+				y2 = y1;
+				y1 = temp;
+			}
+		}
+		
+		for (int i = x1; i < x2; i++)
+		{
+			for (int j = y1; j < y2; j++)
+			{
+				Optional<Cell> optionalCell = pizza.getCell(i, j);
+				Cell fixedCell = null;
+				if (optionalCell.isPresent()) {
+					fixedCell = optionalCell.get();
+				}
+				
+				if (!fixedCell.isAvailable()) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Slice [a(" + a.getX() + ", " + a.getY() + "); b(" + b.getX() + ", " + b.getY() + ")]";
+	}
+	
 	// TODO Method to get score about slice
-
+	
 }

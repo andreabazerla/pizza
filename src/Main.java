@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import entity.Cell;
@@ -27,7 +28,7 @@ public class Main {
 		Instructions instructions = Parser.parseInstructions(inputFile);
 		System.out.println(instructions.toString());
 
-		Pizza pizza = new Pizza(new File(inputFile), instructions, Parser.parsePizza(inputFile));
+		Pizza pizza = new Pizza(new File(inputFile), instructions, Parser.parsePizza(inputFile), new ArrayList<>());
 		System.out.println(pizza.toString());
 
 		int rows = instructions.getRows();
@@ -61,11 +62,28 @@ public class Main {
 						int deltaY = Math.abs(vy - y);
 						
 						if (deltaX * deltaY > max) {
-							System.out.println("err");
 							continue;
 						}
+						
 
-						Slice slice = new Slice(new Cell(x, y, randomCell.getIngredient(), false), new Cell(x, y, randomCell.getIngredient(), false));
+						randomCell.setAvailable(false);
+						Optional<Cell> vectorCell = pizza.getCell(vx, vy);
+						Cell fixedCell = null;
+						if (vectorCell.isPresent()) {
+							fixedCell = vectorCell.get();
+							
+							if (!Slice.checkAvailability(randomCell, fixedCell, pizza)) {
+								continue;
+							}
+						}
+						
+						fixedCell.setAvailable(false);
+						
+						Slice slice = new Slice(randomCell, fixedCell);
+						
+						pizza.add(slice);
+						
+						System.out.println(slice);
 					
 					}
 					

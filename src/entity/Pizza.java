@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,10 +12,11 @@ public class Pizza {
 	private List<Cell> cells;
 	private List<Slice> slices;
 
-	public Pizza(File file, Instructions instructions, List<Cell> cells) {
+	public Pizza(File file, Instructions instructions, List<Cell> cells, List<Slice> slices) {
 		this.file = file;
 		this.instructions = instructions;
 		this.cells = cells;
+		this.slices = slices;
 	}
 
 	public File getFile() {
