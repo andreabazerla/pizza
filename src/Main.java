@@ -65,35 +65,27 @@ public class Main {
 							continue;
 						}
 						
-
+						// TODO Loop to catch the best B(x,y) for slice
 						randomCell.setAvailable(false);
 						Optional<Cell> vectorCell = pizza.getCell(vx, vy);
 						Cell fixedCell = null;
 						if (vectorCell.isPresent()) {
 							fixedCell = vectorCell.get();
 							
-							if (!Slice.checkAvailability(randomCell, fixedCell, pizza)) {
+							Slice slice = new Slice(randomCell, fixedCell);
+							if (Slice.checkAvailability(randomCell, fixedCell, pizza)) {
+								fixedCell.setAvailable(false);
+								System.out.println(slice);
+								pizza.add(slice);
+							} else {
 								continue;
 							}
 						}
-						
-						fixedCell.setAvailable(false);
-						
-						Slice slice = new Slice(randomCell, fixedCell);
-						
-						pizza.add(slice);
-						
-						System.out.println(slice);
-					
 					}
-					
 				} else {
 					continue;
 				}
 			}
-	
 		}
-		
 	}
-
 }

@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,6 +91,19 @@ public class Pizza {
 		return score;
 	}
 	
-	// TODO Method to get score about all list of slice in pizza
-
+	public Ingredient[][] getMatrix() {
+		
+		Ingredient[][] matrix = new Ingredient[instructions.getRows()][instructions.getColumns()];
+		
+		for (Cell cell : cells)
+		{
+			int x = cell.getX();
+			int y = cell.getY();
+			
+			matrix[x][y] = cell.getIngredient();
+		}
+		
+		return matrix;
+	}
+	
 }
