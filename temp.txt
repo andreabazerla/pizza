@@ -30,7 +30,7 @@
 		P(BX=0,AY=1)
 		
 		0-3=-3; 4-1=3
-		OPPOSTO, NEGATIVO SU X, INVERTO Q CON P
+		OPPOSTO, NEGATIVO SU X, UTILIZZO E INVERTO Q CON P
 
 		
 		O B O O O
@@ -49,7 +49,7 @@
 		
 		P = B
 		Q = A
-		
+		STESSA X, NEGATIVO SU Y, UTILIZZO  P E Q
 		
 		
 		P B O O O
@@ -64,5 +64,5 @@
 		P(AX=0,BY=0)
 		Q(BX=1,AY=1)
 		
-		1-0=1; 		
-		OPPOSTO, NEGATIVO SU Y, NIENTE
+		1-0=1; 0-1=-1	
+		OPPOSTO, NEGATIVO SU Y, UTILIZZO P E Q
