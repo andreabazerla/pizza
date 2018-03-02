@@ -38,7 +38,6 @@ public class Main {
 		Random random = new Random();
 		Optional<Cell> optionalCell;
 		Cell randomCell;
-		Point cursor = new Point();
 		
 		while(true) {
 		
@@ -61,12 +60,16 @@ public class Main {
 						int deltaX = Math.abs(vx - x);
 						int deltaY = Math.abs(vy - y);
 						
+						if (deltaX == 0) {
+							deltaX = 1;
+						} else if (deltaY == 0) {
+							deltaY = 1;
+						}
+						
 						if (deltaX * deltaY > max) {
 							continue;
 						}
 						
-						// TODO Loop to catch the best B(x,y) for slice
-						randomCell.setAvailable(false);
 						Optional<Cell> vectorCell = pizza.getCell(vx, vy);
 						Cell fixedCell = null;
 						if (vectorCell.isPresent()) {
@@ -74,9 +77,9 @@ public class Main {
 							
 							Slice slice = new Slice(randomCell, fixedCell);
 							if (Slice.checkAvailability(randomCell, fixedCell, pizza)) {
-								fixedCell.setAvailable(false);
 								System.out.println(slice);
 								pizza.add(slice);
+								break;
 							} else {
 								continue;
 							}

@@ -64,9 +64,9 @@ public class Parser {
 
 					Character character = fileLine.charAt(column);
 					if (character.toString().equals(Ingredient.MUSHROOM.toString())) {
-						cells.add(new Cell(row, column, Ingredient.MUSHROOM, true));
+						cells.add(new Cell(column, row, Ingredient.MUSHROOM, true));
 					} else if (character.toString().equals(Ingredient.TOMATO.toString())) {
-						cells.add(new Cell(row, column, Ingredient.TOMATO, true));
+						cells.add(new Cell(column, row, Ingredient.TOMATO, true));
 					}
 
 				}

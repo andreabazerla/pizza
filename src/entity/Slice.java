@@ -3,24 +3,40 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import utils.Direction;
 
 public class Slice {
 
 	private List<Cell> cellList = new ArrayList<>();
 
-	private Cell a;
-	private Cell b;
+	private Point p;
+	private Point q;
 
 	public Slice(List<Cell> cellList) {
 		super();
 		this.cellList = cellList;
 	}
 
-	public Slice(Cell a, Cell b) {
+	public Slice(Point a, Point b) {
 		super();
-		this.a = a;
-		this.b = b;
+		
+		if (a.getX() >= b.getX()) {
+			if (a.getY() >= b.getY()) {
+				p = new Point(b.getX(), b.getY());
+				q = new Point(a.getX(), a.getY());
+			} else {
+				p = new Point(b.getX(), a.getY());
+				q = new Point(a.getX(), b.getY());
+			}
+		} else {
+			if (a.getY() >= b.getY()) {
+				p = new Point(a.getX(), b.getY());
+				q = new Point(b.getX(), a.getY());
+			} else {
+				p = new Point(a.getX(), a.getY());
+				q = new Point(b.getX(), b.getY());
+			}
+		}
+		
 	}
 
 	public List<Cell> getCellList() {
@@ -31,108 +47,31 @@ public class Slice {
 		this.cellList = cellList;
 	}
 
-	public Cell getA() {
-		return a;
+	public Point getP()
+	{
+		return p;
 	}
 
-	public void setA(Cell a) {
-		this.a = a;
+	public void setP(Point p)
+	{
+		this.p = p;
 	}
 
-	public Cell getB() {
-		return b;
+	public Point getQ()
+	{
+		return q;
 	}
 
-	public void setB(Cell b) {
-		this.b = b;
-	}
-
-	public void move(Pizza pizza, Cell explorer, Direction direction) {
-
-		Optional<Cell> optionalCell = null;
-		
-		switch (direction) {
-			case RIGHT:
-				optionalCell = pizza.getCell(explorer.getX() + 1, explorer.getY());
-				break;
-			default:
-				break;
-		}
-				
-		if (optionalCell.isPresent()) {
-			Cell cell = optionalCell.get();
-			
-			if (cell.isAvailable()) {
-				
-				List<Cell> cellEdgeList = checkEdge(pizza, this.a, this.b, direction);
-				if (cellEdgeList != null) {
-					
-				}
-				
-				this.setB(cell);
-			}
-		}
-	}
-	
-	private List<Cell> checkEdge(Pizza pizza, Cell a, Cell b, Direction direction)	{
-		
-		List<Cell> cellEdgeList = new ArrayList<>();
-		Cell temp;
-
-		if (a.getX() > b.getX() || a.getY() < b.getY()) {
-			temp = a;
-			a = b;
-			b = temp;
-		}
-		
-		int deltaX;
-		int deltaY;
-		
-		deltaX = b.getX() - a.getX();
-		deltaY = b.getY() - a.getY();
-		
-		Optional<Cell> optionalCell = pizza.getCell(b.getX() - 1, b.getY());
-		while (deltaX > 0) {
-			if (optionalCell.isPresent()) {
-				Cell cell = optionalCell.get();
-				if (cell.isAvailable()) {
-					cellEdgeList.add(cell);
-					cell.setAvailable(false);
-				} else {
-					return null;
-				}
-			}
-			
-			deltaX--;
-		}
-		
-		optionalCell = pizza.getCell(b.getX(), b.getY() + 1);
-		while (deltaY > 0) {
-			if (optionalCell.isPresent()) {
-				Cell cell = optionalCell.get();
-				if (cell.isAvailable()) {
-					cellEdgeList.add(cell);
-					cell.setAvailable(false);
-				} else {
-					return null;
-				}
-			}
-			
-			deltaY--;
-		}
-		
-		cellEdgeList.add(b);
-		b.setAvailable(false);
-		
-		return cellEdgeList;
-		
+	public void setQ(Point q)
+	{
+		this.q = q;
 	}
 	
 	public int getScore()
 	{
 
-		int deltaX = Math.abs(a.getX() - b.getX());
-		int deltaY = Math.abs(a.getY() - b.getY());
+		int deltaX = Math.abs(q.getX() - p.getX());
+		int deltaY = Math.abs(q.getY() - p.getY());
 
 		return deltaX * deltaY;
 
@@ -195,7 +134,7 @@ public class Slice {
 	@Override
 	public String toString()
 	{
-		return "Slice [a(" + a.getX() + ", " + a.getY() + "); b(" + b.getX() + ", " + b.getY() + ")]";
+		return "Slice [p(" + p.getX() + ", " + p.getY() + "); q(" + q.getX() + ", " + q.getY() + ")]";
 	}
 	
 }
