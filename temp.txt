@@ -66,3 +66,40 @@
 		
 		1-0=1; 0-1=-1	
 		OPPOSTO, NEGATIVO SU Y, UTILIZZO P E Q
+		
+		
+6 7 1 5
+TMMMTTT
+MMMMTMM
+TTMTTMT
+TMMTMMM
+TTTTTTM
+TTTTTTM
+
+T = 24 = 57.14% = 0.57
+M = 18 = 42.86% = 0.43
+
+TM
+MM
+
+T = 1 = 0.25
+M = 3 = 0.75
+
+T = 0.1425
+M = 0.3225
+tot = 0.465
+
+MMMMT
+
+T = 1 = 0.20
+M = 4 = 0.80
+
+0.794
+0.200
+
+T = 0.114 
+M = 0.344
+tot = 0.458
+
+MIN = 1
+MAX = 5 

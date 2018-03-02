@@ -140,23 +140,29 @@ public class Slice {
 	
 	public static boolean checkAvailability(Cell a, Cell b, Pizza pizza) {
 		
-		Cell temp = null;
-				
-		if (a.getX() > b.getX() && b.getY() >= a.getY()) {
-			temp = b;
-			b = a;
-			a = temp;
+		Point p, q;
+		
+		if (a.getX() >= b.getX()) {
+			if (a.getY() >= b.getY()) {
+				p = new Point(b.getX(), b.getY());
+				q = new Point(a.getX(), a.getY());
+			} else {
+				p = new Point(b.getX(), a.getY());
+				q = new Point(a.getX(), b.getY());
+			}
+		} else {
+			if (a.getY() >= b.getY()) {
+				p = new Point(a.getX(), b.getY());
+				q = new Point(b.getX(), a.getY());
+			} else {
+				p = new Point(a.getX(), a.getY());
+				q = new Point(b.getX(), b.getY());
+			}
 		}
 		
-		if (a.getY() > b.getY() && b.getX() >= a.getX()) {
-			temp = b;
-			b = a;
-			a = temp;
-		}
-		
-		for (int i = a.getX(); i <= b.getX(); i++)
+		for (int i = p.getX(); i <= q.getX(); i++)
 		{
-			for (int j = a.getY(); j <= b.getY(); j++)
+			for (int j = p.getY(); j <= q.getY(); j++)
 			{
 				Optional<Cell> optionalCell = pizza.getCell(i, j);
 				Cell fixedCell = null;
@@ -170,9 +176,9 @@ public class Slice {
 			}
 		}
 		
-		for (int i = a.getX(); i <= b.getX(); i++)
+		for (int i = p.getX(); i <= q.getX(); i++)
 		{
-			for (int j = a.getY(); j <= b.getY(); j++)
+			for (int j = p.getY(); j <= q.getY(); j++)
 			{
 				Optional<Cell> optionalCell = pizza.getCell(i, j);
 				Cell fixedCell = null;
