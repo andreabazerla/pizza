@@ -45,8 +45,8 @@ public class Pizza {
 	}
 
 	public Optional<Cell> getCell(int x, int y) {
+		return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
 	}
-	return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
 
 	@Override
 	public String toString() {
