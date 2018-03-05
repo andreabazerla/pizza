@@ -33,19 +33,46 @@ public class Pizza {
 	public void setCells(List<Cell> cells) {
 		this.cells = cells;
 	}
-	
-	public List<Slice> getSlices()
-	{
+
+	public List<Slice> getSlices() {
 		return slices;
 	}
 
-	public void setSlices(List<Slice> slices)
-	{
+	public void setSlices(List<Slice> slices) {
 		this.slices = slices;
 	}
 
 	public Optional<Cell> getCell(int x, int y) {
 		return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
+	}
+
+	public void reset() {
+		// for (Slice slice : slices) {
+		// for (Cell cell : slice.getCellList()) {
+		// cell.setAvailable(false);
+		// cell.setChecked(false);
+		// cell.setStop(false);
+		// cell.setExit(false);
+		// }
+		// }
+
+		for (Cell cell : cells) {
+			cell.setAvailable(false);
+			cell.setChecked(false);
+			cell.setStop(false);
+			cell.setExit(false);
+		}
+	}
+
+	public void resetChecked() {
+		// for (Slice slice : slices) {
+		// for (Cell cell : slice.getCellList()) {
+		// cell.setChecked(false);
+		// }
+		// }
+		for (Cell cell : cells) {
+			cell.setChecked(false);
+		}
 	}
 
 	@Override
@@ -72,38 +99,36 @@ public class Pizza {
 
 		return stringBuilder.toString();
 	}
-	
+
 	public void add(Slice slice) {
 		this.slices.add(slice);
 	}
-	
+
 	public int getTotalScore() {
-		
+
 		int score = 0;
-		
+
 		if (!this.getSlices().isEmpty()) {
-			for (Slice slice : slices)
-			{
+			for (Slice slice : this.getSlices()) {
 				score += slice.getScore();
 			}
 		}
-		
+
 		return score;
 	}
-	
+
 	public Ingredient[][] getMatrix() {
-		
+
 		Ingredient[][] matrix = new Ingredient[instructions.getRows()][instructions.getColumns()];
-		
-		for (Cell cell : cells)
-		{
+
+		for (Cell cell : cells) {
 			int x = cell.getX();
 			int y = cell.getY();
-			
+
 			matrix[x][y] = cell.getIngredient();
 		}
-		
+
 		return matrix;
 	}
-	
+
 }
