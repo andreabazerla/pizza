@@ -46,31 +46,23 @@ public class Pizza {
 		return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
 	}
 
-	public void reset() {
-		// for (Slice slice : slices) {
-		// for (Cell cell : slice.getCellList()) {
-		// cell.setAvailable(false);
-		// cell.setChecked(false);
-		// cell.setStop(false);
-		// cell.setExit(false);
-		// }
-		// }
-
-		for (Cell cell : cells) {
-			cell.setAvailable(false);
+	public void init() {
+		for (Cell cell : this.cells) {
 			cell.setChecked(false);
-			cell.setStop(false);
-			cell.setExit(false);
+			cell.setVisible(false);
+		}
+	}
+
+	public void reset() {
+		for (Cell cell : this.cells) {
+			cell.setAvailable(cell.isAvailable());
+			cell.setChecked(false);
+			cell.setVisible(false);
 		}
 	}
 
 	public void resetChecked() {
-		// for (Slice slice : slices) {
-		// for (Cell cell : slice.getCellList()) {
-		// cell.setChecked(false);
-		// }
-		// }
-		for (Cell cell : cells) {
+		for (Cell cell : this.cells) {
 			cell.setChecked(false);
 		}
 	}
@@ -108,10 +100,8 @@ public class Pizza {
 
 		int score = 0;
 
-		if (!this.getSlices().isEmpty()) {
-			for (Slice slice : this.getSlices()) {
-				score += slice.getScore();
-			}
+		for (Slice slice : this.slices) {
+			score += slice.getScore();
 		}
 
 		return score;
