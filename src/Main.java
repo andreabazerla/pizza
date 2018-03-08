@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import entity.Cell;
 import entity.Instructions;
@@ -14,7 +15,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		slicePizza("input/example.in", "output/example.in");
+		slicePizza("input/custom.in", "output/example.in");
 
 	}
 
@@ -35,12 +36,19 @@ public class Main {
 
 		int invisible = 0;
 		int score = 0;
+		int bias = 100;
+		double loop = 0;
 		while (true) {
 
 			pizza.reset();
-			if (score >= columns * rows) {
+			if (score >= columns * rows * bias / 100) {
 				invisible = 0;
 				break;
+			} else {
+				loop++;
+				if (loop % 100 == 0) {
+					bias--;
+				}
 			}
 
 			while (true) {
@@ -49,6 +57,7 @@ public class Main {
 
 				if (invisible >= columns * rows) {
 					score = pizza.getTotalScore();
+					System.out.println(score + " " + score * 100 / (columns * rows) + "% " + bias + " " + loop);
 					pizza = new Pizza(new File(inputFile), instructions, Parser.parsePizza(inputFile),
 							new ArrayList<>());
 					pizza.getSlices().clear();
@@ -70,8 +79,8 @@ public class Main {
 
 						while (true) {
 
-							if (checked >= (Math.min(columns, max) - randomCell.getX())
-									* (Math.min(rows, max) - randomCell.getY()) - 1) {
+							if (checked >= (Math.min(columns, max + randomCell.getX()) - randomCell.getX())
+									* (Math.min(rows, max + randomCell.getY()) - randomCell.getY()) - 1) {
 
 								randomCell.setVisible(true);
 								pizza.resetChecked();
@@ -80,8 +89,10 @@ public class Main {
 								break;
 							}
 
-							int vx = randomCell.getX() + random.nextInt(Math.min(columns, max) - randomCell.getX());
-							int vy = randomCell.getY() + random.nextInt(Math.min(rows, max) - randomCell.getY());
+							int vx = ThreadLocalRandom.current().nextInt(randomCell.getX(),
+									Math.min(columns, max) + randomCell.getX() + 1);
+							int vy = ThreadLocalRandom.current().nextInt(randomCell.getY(),
+									Math.min(rows, max) + randomCell.getY() + 1);
 
 							if (vx < x || vy < y) {
 								continue;
@@ -102,9 +113,9 @@ public class Main {
 
 									Slice slice = new Slice(randomCell, fixedCell);
 									if (slice.checkAvailability(randomCell, fixedCell, pizza)) {
-										System.out.println(slice);
+										// System.out.println(slice);
 										pizza.add(slice);
-										System.out.println("Score: " + pizza.getTotalScore());
+										// System.out.println("Score: " + pizza.getTotalScore());
 										break;
 									} else {
 										continue;
