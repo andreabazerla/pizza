@@ -4,12 +4,13 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
-public class Pizza {
+public class Pizza implements Cloneable {
 
-	private final File file;
-	private final Instructions instructions;
+	private File file;
+	private Instructions instructions;
 	private List<Cell> cells;
 	private List<Slice> slices;
+	private Pizza clone;
 
 	public Pizza(File file, Instructions instructions, List<Cell> cells, List<Slice> slices) {
 		this.file = file;
@@ -119,6 +120,10 @@ public class Pizza {
 		}
 
 		return matrix;
+	}
+
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 }

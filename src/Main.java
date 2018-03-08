@@ -30,25 +30,29 @@ public class Main {
 		int columns = instructions.getColumns();
 		int min = instructions.getMin();
 		int max = instructions.getMax();
-		
+
 		pizza.init();
-		
+
 		int invisible = 0;
+		int score = 0;
 		while (true) {
 
 			pizza.reset();
-			if (pizza.getTotalScore() >= columns * rows) {
+			if (score >= columns * rows) {
 				invisible = 0;
 				break;
-			}			
+			}
 
 			while (true) {
 
 				pizza.resetChecked();
-				
+
 				if (invisible >= columns * rows) {
-					pizza.reset();
+					score = pizza.getTotalScore();
+					pizza = new Pizza(new File(inputFile), instructions, Parser.parsePizza(inputFile),
+							new ArrayList<>());
 					pizza.getSlices().clear();
+					invisible = 0;
 					break;
 				}
 
@@ -68,7 +72,7 @@ public class Main {
 
 							if (checked >= (Math.min(columns, max) - randomCell.getX())
 									* (Math.min(rows, max) - randomCell.getY()) - 1) {
-								
+
 								randomCell.setVisible(true);
 								pizza.resetChecked();
 								checked = 0;
@@ -114,7 +118,7 @@ public class Main {
 					}
 				}
 			}
-//			System.out.println("RESET");
+			// System.out.println("RESET");
 		}
 		System.out.println("END");
 	}
