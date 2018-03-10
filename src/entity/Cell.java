@@ -4,8 +4,6 @@ public class Cell extends Point {
 
 	private Ingredient ingredient;
 	private boolean available;
-	private boolean checked;
-	private boolean visible;
 
 	public Cell(int x, int y, Ingredient ingredient, boolean available) {
 		super(x, y);
@@ -27,22 +25,6 @@ public class Cell extends Point {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
-	}
-
-	public boolean isChecked() {
-		return checked;
-	}
-
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 
 	@Override

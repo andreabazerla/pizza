@@ -4,13 +4,12 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
-public class Pizza implements Cloneable {
+public class Pizza {
 
 	private File file;
 	private Instructions instructions;
 	private List<Cell> cells;
 	private List<Slice> slices;
-	private Pizza clone;
 
 	public Pizza(File file, Instructions instructions, List<Cell> cells, List<Slice> slices) {
 		this.file = file;
@@ -45,27 +44,6 @@ public class Pizza implements Cloneable {
 
 	public Optional<Cell> getCell(int x, int y) {
 		return cells.stream().filter(cell -> cell.getX() == x && cell.getY() == y).findFirst();
-	}
-
-	public void init() {
-		for (Cell cell : this.cells) {
-			cell.setChecked(false);
-			cell.setVisible(false);
-		}
-	}
-
-	public void reset() {
-		for (Cell cell : this.cells) {
-			cell.setAvailable(cell.isAvailable());
-			cell.setChecked(false);
-			cell.setVisible(false);
-		}
-	}
-
-	public void resetChecked() {
-		for (Cell cell : this.cells) {
-			cell.setChecked(false);
-		}
 	}
 
 	@Override
@@ -120,10 +98,6 @@ public class Pizza implements Cloneable {
 		}
 
 		return matrix;
-	}
-
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 
 }

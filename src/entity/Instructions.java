@@ -4,7 +4,6 @@ public class Instructions {
 
 	private int rows;
 	private int columns;
-
 	private int min;
 	private int max;
 

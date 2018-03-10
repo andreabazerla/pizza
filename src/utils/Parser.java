@@ -43,7 +43,6 @@ public class Parser {
 		}
 
 		return instructions;
-
 	}
 
 	public static List<Cell> parsePizza(String file) throws IOException {
@@ -76,7 +75,6 @@ public class Parser {
 
 			return cells;
 		}
-
 	}
+	
 }
-
